@@ -1,20 +1,20 @@
-import { all, put, takeEvery } from "redux-saga/effects";
+import { all, call, put, takeEvery } from "redux-saga/effects";
 
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+export const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 // eslint-disable-next-line require-yield
-function* helloSaga() {
+export function* helloSaga() {
   console.log("Hello Sagas!");
 }
 
 // Our worker Saga: will perform the async increment task
-function* incrementAsync() {
-  yield delay(1000);
+export function* incrementAsync() {
+  yield call(delay, 1000);
   yield put({ type: "INCREMENT" });
 }
 
 // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
-function* watchIncrementAsync() {
+export function* watchIncrementAsync() {
   yield takeEvery("INCREMENT_ASYNC", incrementAsync);
 }
 
